@@ -1,6 +1,6 @@
 # SINGLE permanent bucket - CHANGE THE NUMBER TO BE UNIQUE
 resource "aws_s3_bucket" "my_website_bucket" {
-  bucket = "qamar-devops-portfolio-729"  # ← CHANGE 729 to any random numbers
+  bucket = "qamar-devops-portfolio-2772"  # ← CHANGE 729 to any random numbers
   force_destroy = true
 }
 
