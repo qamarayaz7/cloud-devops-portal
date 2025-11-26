@@ -35,3 +35,6 @@ resource "aws_s3_bucket_policy" "allow_public_read" {
     ]
   })
 }
+output "website_url" {
+  value = "http://${aws_s3_bucket.my_website_bucket.bucket}.s3-website-us-east-1.amazonaws.com"
+}
