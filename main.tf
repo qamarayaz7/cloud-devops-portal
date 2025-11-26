@@ -1,17 +1,3 @@
-# Configure the AWS Provider
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = "us-east-1"
-}
-
 # Create S3 bucket with unique name
 resource "aws_s3_bucket" "my_website_bucket" {
   bucket_prefix = "qamar-devops-"
