@@ -1,7 +1,6 @@
 resource "aws_s3_bucket" "my_website_bucket" {
-  bucket = "qamar-bucket-12"
+  bucket_prefix = "qamar-devops-"  # Terraform will make it unique
 }
-
 resource "aws_s3_bucket_website_configuration" "my_website" {
   bucket = aws_s3_bucket.my_website_bucket.id
   index_document {
