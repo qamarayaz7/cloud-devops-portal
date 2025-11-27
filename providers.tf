@@ -7,11 +7,9 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "qamar-devops-portfolio-729"
+    bucket = "qamar-devops-portfolio-2772"  # ← YOUR ACTUAL BUCKET
     key    = "terraform/terraform.tfstate"
     region = "us-east-1"
-    
-    # These will use the same AWS credentials you already have
   }
 }
 
