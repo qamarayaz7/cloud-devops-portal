@@ -34,5 +34,10 @@ jobs:
 
     - name: Invalidate CloudFront Cache
       run: |
-        DISTRIBUTION_ID=$(terraform output -raw cloudfront_distribution_id 2>/dev/null || echo "E3S89NM030YTOO")
-        aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
+        # Get distribution ID from Terraform output
+        DISTRIBUTION_ID=$(terraform output cloudfront_distribution_id | tr -d '"')
+        
+        # Invalidate cache
+        aws cloudfront create-invalidation \
+          --distribution-id $DISTRIBUTION_ID \
+          --paths "/*"

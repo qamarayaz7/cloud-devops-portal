@@ -91,6 +91,12 @@ resource "aws_cloudfront_distribution" "website_cdn" {
 }
 
 # Update the output to show CloudFront URL instead of S3
+output "cloudfront_distribution_id" {
+  value = aws_cloudfront_distribution.website_cdn.id
+  description = "CloudFront distribution ID for cache invalidation"
+}
+
 output "website_url" {
   value = "https://${aws_cloudfront_distribution.website_cdn.domain_name}"
+  description = "The CloudFront URL for the website"
 }
