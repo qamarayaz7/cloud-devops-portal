@@ -22,17 +22,11 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: Terraform Init with Force Migration
-      run: |
-        terraform init \
-          -backend-config="bucket=qamar-devops-portfolio-2772" \
-          -backend-config="key=terraform/terraform.tfstate" \
-          -backend-config="region=us-east-1" \
-          -migrate-state \
-          -force-copy
+    - name: Terraform Init
+      run: terraform init
 
-    - name: Repair Terraform State
-      run: terraform refresh
+    - name: Force S3 Object Update
+      run: terraform state rm aws_s3_object.website_file
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
