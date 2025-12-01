@@ -31,3 +31,8 @@ jobs:
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
+
+    - name: Invalidate CloudFront Cache
+      run: |
+        DISTRIBUTION_ID=$(terraform output -raw cloudfront_distribution_id 2>/dev/null || echo "E3S89NM030YTOO")
+        aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
