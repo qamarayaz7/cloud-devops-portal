@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "qamar-devops-portfolio-2772"  # ← YOUR ACTUAL BUCKET
+    bucket = "qamar-devops-portfolio-2772"  # ← MY ACTUAL BUCKET
     key    = "terraform/terraform.tfstate"
     region = "us-east-1"
   }
