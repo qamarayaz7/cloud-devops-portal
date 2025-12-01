@@ -22,6 +22,12 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
+    - name: Invalidate CloudFront Cache
+      run: aws cloudfront create-invalidation --distribution-id E3S89NM030YTOO --paths "/*"
+      
+    - name: Force File Change Detection
+      run: terraform taint aws_s3_object.website_file
+
     - name: Terraform Init
       run: |
         terraform init \
@@ -32,6 +38,3 @@ jobs:
     - name: Terraform Apply
       run: terraform apply -auto-approve
 
-    - name: Invalidate CloudFront Cache
-      run: aws cloudfront create-invalidation --distribution-id E3S89NM030YTOO --paths "/*"
-      
