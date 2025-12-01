@@ -25,8 +25,15 @@ jobs:
     - name: Terraform Init
       run: terraform init
 
-    - name: Force S3 Object Update
-      run: terraform state rm aws_s3_object.website_file
+    - name: Force S3 Update
+      run: terraform state rm aws_s3_object.website_file || true
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
+
+    - name: Invalidate CloudFront Cache
+      run: |
+        aws cloudfront create-invalidation \
+          --distribution-id "E3S89NM030YTOO" \
+          --paths "/*"
+        echo "Cache cleared. Site will update in 1-5 minutes."
