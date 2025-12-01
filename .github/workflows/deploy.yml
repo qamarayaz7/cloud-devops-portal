@@ -22,20 +22,17 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: Invalidate CloudFront Cache
-      run: aws cloudfront create-invalidation --distribution-id E3S89NM030YTOO --paths "/*"
-      
-
-    - name: Terraform Init
+    - name: Terraform Init with Force Migration
       run: |
         terraform init \
           -backend-config="bucket=qamar-devops-portfolio-2772" \
           -backend-config="key=terraform/terraform.tfstate" \
-          -backend-config="region=us-east-1"
+          -backend-config="region=us-east-1" \
+          -migrate-state \
+          -force-copy
 
-    - name: Force File Change Detection
-      run: terraform taint aws_s3_object.website_file
+    - name: Repair Terraform State
+      run: terraform refresh
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
-
