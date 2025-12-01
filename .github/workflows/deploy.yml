@@ -28,6 +28,6 @@ jobs:
           -backend-config="bucket=qamar-devops-portfolio-2772" \
           -backend-config="key=terraform/terraform.tfstate" \
           -backend-config="region=us-east-1"
-          
+
     - name: Terraform Apply
       run: terraform apply -auto-approve
